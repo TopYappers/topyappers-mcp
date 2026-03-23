@@ -1,0 +1,22 @@
+name = "topyappers-mcp"
+main = "src/entry.py"
+compatibility_date = "2024-12-18"
+compatibility_flags = ["python_workers"]
+
+# Custom domain — uncomment and set your domain once DNS is configured in Cloudflare.
+# The domain must be on a zone (root domain) already added to your Cloudflare account.
+# Cloudflare will automatically provision an SSL certificate.
+#
+# Option A: Custom hostname (e.g. mcp.topyappers.com)
+# [env.production.routes]
+# routes = [
+#   { pattern = "mcp.topyappers.com", custom_domain = true }
+# ]
+#
+# Option B: Simpler — use the top-level custom_domain shorthand
+# [[routes]]
+# pattern = "mcp.topyappers.com"
+# custom_domain = true
+
+[observability]
+enabled = true
