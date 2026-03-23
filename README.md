@@ -1,8 +1,8 @@
 # TopYappers MCP Server
 
-A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server deployed on **Cloudflare Workers** (Python) that gives AI agents access to the [TopYappers API](https://docs.topyappers.com) for discovering viral content, trending songs, and influencers.
+A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that gives AI agents access to the [TopYappers API](https://docs.topyappers.com) for discovering viral content, trending songs, and influencers.
 
-## Features
+## Available Tools
 
 | Tool | Description | Cost |
 |------|-------------|------|
@@ -18,75 +18,22 @@ A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server deploy
 | `get_song_countries` | List available countries for song data | 10 credits |
 | `get_song_weeks` | List available weeks for a country | 10 credits |
 
-## Prerequisites
+## Getting Started
 
-- [Cloudflare account](https://dash.cloudflare.com/)
-- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/install-and-update/) (`npm install -g wrangler`)
-- [TopYappers API key](https://www.topyappers.com/profile)
+1. Get a TopYappers API key at [topyappers.com/profile](https://www.topyappers.com/profile)
+2. Add the MCP server to your client (see below)
 
-## Deploy
-
-### Manual
-
-```bash
-cd topyappers-mcp
-npx wrangler login
-npx wrangler deploy
-```
-
-### CI/CD (GitHub Actions)
-
-Deploys automatically on every push to `main`. Set these repository secrets in **Settings → Secrets and variables → Actions**:
-
-| Secret | Where to find it |
-|--------|-----------------|
-| `CLOUDFLARE_API_TOKEN` | [Cloudflare Dashboard → API Tokens](https://dash.cloudflare.com/profile/api-tokens) — create a token with **Edit Cloudflare Workers** permission |
-| `CLOUDFLARE_ACCOUNT_ID` | [Cloudflare Dashboard → Workers & Pages → Overview](https://dash.cloudflare.com/) — shown in the right sidebar |
-
-You can also trigger a deploy manually from the **Actions** tab using the "Run workflow" button.
-
-After deploying, your MCP server will be available at:
-```
-https://topyappers-mcp.<your-subdomain>.workers.dev
-```
-
-### Custom Domain
-
-To use a custom domain like `mcp.topyappers.com`:
-
-1. Make sure the root domain (e.g. `topyappers.com`) is added as a zone in your Cloudflare account
-2. In `wrangler.toml`, uncomment and edit the routes section:
-   ```toml
-   [[routes]]
-   pattern = "mcp.topyappers.com"
-   custom_domain = true
-   ```
-3. Deploy — Cloudflare will automatically create the DNS record and provision an SSL certificate
-4. Alternatively, configure it in the Cloudflare Dashboard: **Workers & Pages → topyappers-mcp → Settings → Domains & Routes → Add → Custom Domain**
-
-## Authentication
-
-The MCP server uses **Bearer token authentication**. Clients pass their TopYappers API key as a Bearer token in the `Authorization` header. The server forwards it to the TopYappers API as the `x-ty-api-key` header.
-
-Alternatively, you can set a default API key as a Cloudflare Worker secret:
-
-```bash
-npx wrangler secret put TOPYAPPERS_API_KEY
-```
-
-The server checks the `Authorization: Bearer` header first, then falls back to the `TOPYAPPERS_API_KEY` secret.
-
-## MCP Client Configuration
+## Setup
 
 ### Cursor
 
-Add to your Cursor MCP settings (`.cursor/mcp.json`):
+Add to your MCP settings (`.cursor/mcp.json`):
 
 ```json
 {
   "mcpServers": {
     "topyappers": {
-      "url": "https://topyappers-mcp.<your-subdomain>.workers.dev",
+      "url": "https://mcp.topyappers.com",
       "headers": {
         "Authorization": "Bearer YOUR_TOPYAPPERS_API_KEY"
       }
@@ -103,7 +50,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 {
   "mcpServers": {
     "topyappers": {
-      "url": "https://topyappers-mcp.<your-subdomain>.workers.dev",
+      "url": "https://mcp.topyappers.com",
       "headers": {
         "Authorization": "Bearer YOUR_TOPYAPPERS_API_KEY"
       }
@@ -111,6 +58,10 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
   }
 }
 ```
+
+## Authentication
+
+Pass your TopYappers API key as a Bearer token in the `Authorization` header. The server forwards it to the TopYappers API — no keys are stored on the server.
 
 ## Documentation
 
@@ -123,36 +74,32 @@ Detailed docs for each API domain:
 - [**Trending Songs** — rankings, new entries, history, comparisons](./docs/songs.md)
 - [**Reference** — all enums, countries, categories, languages](./docs/reference.md)
 
-## Example Agent Workflows
+## Example Workflows
 
 ### Find viral fitness content from the US
 
-1. Agent calls `search_viral_content` with `categories: ["Fitness"]`, `countries: ["United States"]`, `viralityScoreMin: 0.5`
-2. Gets back viral videos with engagement metrics and creator info
+1. Call `search_viral_content` with `categories: ["Fitness"]`, `countries: ["United States"]`, `viralityScoreMin: 0.5`
+2. Get back viral videos with engagement metrics and creator info
 
 ### Discover fashion influencers on Instagram
 
-1. Agent calls `search_creators` with `source: "instagram"`, `mainCategory: "Fashion"`, `followersMin: 50000` (free)
-2. Agent calls `get_creator_profiles` with the returned `userIds` (1 credit each)
-3. Gets full profiles with email, bio, engagement rate, etc.
+1. Call `search_creators` with `source: "instagram"`, `mainCategory: "Fashion"`, `followersMin: 50000` (free)
+2. Call `get_creator_profiles` with the returned `userIds` (1 credit each)
+3. Get full profiles with email, bio, engagement rate, etc.
 
 ### Find trending songs in the UK
 
-1. Agent calls `get_song_rankings` with `country: "GB"`
-2. Gets the latest chart with song titles, artists, ranks, and movement
-3. Optionally calls `get_song_history` for deeper analysis of a specific song
+1. Call `get_song_rankings` with `country: "GB"`
+2. Get the latest chart with song titles, artists, ranks, and movement
+3. Call `get_song_history` for deeper analysis of a specific song
 
 ## Rate Limits
 
 - **60 requests per minute** per API key
 - HTTP 429 responses include `retryAfter` indicating seconds to wait
 
-## Development
+## Links
 
-For local development/testing, you can use Wrangler's dev mode:
-
-```bash
-npx wrangler dev
-```
-
-This starts a local server at `http://localhost:8787` that you can point your MCP client to.
+- [TopYappers Platform](https://www.topyappers.com)
+- [API Documentation](https://docs.topyappers.com)
+- [Get an API Key](https://www.topyappers.com/profile)
