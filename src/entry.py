@@ -588,10 +588,17 @@ This is a **two-step workflow** to save credits:
 - `emailExists` — set `true` to only get creators with contact email
 
 **CRITICAL — AND matching for nichesToPromote, promotedProducts, and hashtags:**
-These fields use AND logic when comma-separated. Passing `nichesToPromote=skincare,beauty` only returns creators matching BOTH terms, which can return zero results. **Always search ONE keyword at a time** and combine the userIds from multiple searches. Since search is free, run several narrow searches instead of one broad one:
-1. `nichesToPromote=skincare` → collect userIds
-2. `nichesToPromote=beauty` → collect userIds
-3. Deduplicate and pass the merged list to `get_creator_profiles`
+These fields use AND logic when comma-separated. Passing `nichesToPromote=skincare,beauty` only returns creators matching BOTH terms, which can return zero results. **Always search ONE keyword at a time** and combine the userIds from multiple searches. Since search is free, run 5+ narrow searches with different keywords to cast the widest net:
+
+Example for a calorie counting app:
+1. `nichesToPromote=calorie counter` → collect userIds
+2. `nichesToPromote=calorie tracking` → collect userIds
+3. `nichesToPromote=weight loss` → collect userIds
+4. `nichesToPromote=meal prep` → collect userIds
+5. `nichesToPromote=fitness nutrition` → collect userIds
+6. Deduplicate and pass the merged list to `get_creator_profiles`
+
+The niche data is very granular — it understands specific products, use cases, and sub-niches. Be creative with search terms: `calorie counter`, `ai tools`, `standing desk`, `budget travel`, `study tips`, `new moms`, etc.
 
 **Step 2 — Get profiles (1 credit each):** Pass the `userIds` from Step 1 to `get_creator_profiles`. Returns full profiles with follower count, engagement rate, bio, email, promoted products, etc.
 
@@ -635,10 +642,10 @@ Multiple tools for song chart data. All cost **10 credits per request**.
 
 ## Tips for agents
 
-- **One keyword per search for nichesToPromote/promotedProducts/hashtags:** These are AND filters. Multiple comma-separated values require ALL to match. Always run separate searches with one keyword each, then merge the userIds. Search is free so there's no cost.
+- **nichesToPromote is your best friend:** The most powerful filter for creator discovery. It uses AI-analyzed niche data and supports very specific free-text queries like `calorie counter`, `ai tools`, `standing desk`, `budget travel`. The data is granular — think specific products and use cases, not just broad categories.
+- **Run 5+ niche searches per query:** Since `nichesToPromote` is an AND filter and search is free, always run multiple searches with different keywords that describe the target from different angles. For example, for a skincare brand: `skincare`, `beauty routine`, `skin health`, `anti aging`, `dermatology`. Merge and deduplicate all results.
 - **Be credit-efficient:** Start with `search_creators` (free) before calling `get_creator_profiles`. Use smaller `pageSize` / `perPage` when exploring.
 - **Combine filters wisely:** Mix different filter types (category + followers + country) for targeted results, but keep AND text filters (nichesToPromote, promotedProducts, hashtags) to a single value per call.
-- **nichesToPromote is your best friend:** For finding creators who'd be a good fit for a product, `nichesToPromote` uses AI-analyzed data and supports free text search. Run multiple single-keyword searches to cover different angles.
 - **Virality score:** A video with 1M views from a creator with 10K followers (score ~1.0) is far more impressive than 1M views from someone with 10M followers (score ~0.1).
 - **Country format matters:** Viral content and creators use full names ("United States"). Songs use codes ("US").
 """

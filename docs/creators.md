@@ -106,27 +106,56 @@ Use `next_page` and `total_pages` for pagination. When `next_page` is `0`, there
 
 ## Power Filters
 
-### nichesToPromote
+### nichesToPromote — The Most Powerful Filter
 
-**This is the most powerful filter for finding relevant creators.** It's a free-text search against AI-analyzed niche data for each creator.
+**This is your primary tool for finding relevant creators.** It's a free-text search against AI-analyzed niche data for each creator. The AI analysis is surprisingly granular — it understands specific product types, use cases, and sub-niches, not just broad categories.
 
-> **Important: AND matching.** When you pass multiple comma-separated values, ALL of them must match. This dramatically narrows results and can return zero hits. **Search one keyword at a time and combine results across multiple calls.** Since search is free, there's no credit cost.
+> **Important: AND matching.** When you pass multiple comma-separated values, ALL of them must match. This dramatically narrows results and can return zero hits. **Always search one keyword at a time and combine results across multiple calls.** Since search is free, there's no credit cost.
 
-**Do this:**
-1. `nichesToPromote=skincare` → get results
-2. `nichesToPromote=beauty` → get results
-3. Combine/deduplicate the userIds from both calls
+#### The multi-query strategy (recommended)
+
+The best approach is to run **5+ searches with different keywords** that describe what you're looking for from different angles, then merge and deduplicate the results. This casts the widest net.
+
+**Example: Finding creators for a calorie counting app**
+
+1. `nichesToPromote=calorie counter` → collect userIds
+2. `nichesToPromote=calorie tracking` → collect userIds
+3. `nichesToPromote=weight loss` → collect userIds
+4. `nichesToPromote=meal prep` → collect userIds
+5. `nichesToPromote=fitness nutrition` → collect userIds
+6. Deduplicate the combined list
+7. Call `get_creator_profiles` once with the merged IDs
+
+**Example: Finding creators for an AI tool**
+
+1. `nichesToPromote=ai tools` → collect userIds
+2. `nichesToPromote=ChatGPT` → collect userIds
+3. `nichesToPromote=productivity software` → collect userIds
+4. `nichesToPromote=SaaS` → collect userIds
+5. `nichesToPromote=tech reviews` → collect userIds
+6. Deduplicate and get profiles
+
+**Example: Finding creators for a skincare brand**
+
+1. `nichesToPromote=skincare` → collect userIds
+2. `nichesToPromote=beauty routine` → collect userIds
+3. `nichesToPromote=skin health` → collect userIds
+4. `nichesToPromote=anti aging` → collect userIds
+5. `nichesToPromote=dermatology` → collect userIds
+6. Deduplicate and get profiles
+
+#### What makes good search terms
+
+The niche data is very specific. Be creative and think about how creators describe their content:
+
+- **Specific products:** `calorie counter`, `protein powder`, `electric toothbrush`, `standing desk`
+- **Use cases:** `meal prep`, `home workout`, `budget travel`, `study tips`
+- **Audiences:** `new moms`, `college students`, `small business owners`
+- **Verticals:** `SaaS`, `DTC`, `B2B`, `ecommerce`
+- **Tools/brands:** `ChatGPT`, `Notion`, `Canva`, `Shopify`
 
 **Don't do this:**
-- `nichesToPromote=skincare,beauty,wellness` → requires ALL three to match, likely returns very few or zero results
-
-More examples of good single-keyword searches:
-- `nichesToPromote=SaaS` — creators suited for promoting software products
-- `nichesToPromote=skincare` — creators in the skincare space
-- `nichesToPromote=fitness supplements` — creators who promote fitness products
-- `nichesToPromote=meal prep` — food/health creators
-
-Be creative with search terms — it's a discovery tool. Run multiple searches with different terms to cast a wider net.
+- `nichesToPromote=skincare,beauty,wellness` → requires ALL three to match, likely returns nothing
 
 ### promotedProducts
 
