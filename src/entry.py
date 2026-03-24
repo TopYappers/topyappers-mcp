@@ -147,12 +147,14 @@ TOOLS = [
         "name": "search_creators",
         "description": (
             "Search for influencers and creators across TikTok, Instagram, and YouTube. "
-            "Filter by followers, average views, engagement rate, content category, country, "
-            "language, bio keywords, promoted products, niches, hashtags, username, and email. "
             "This endpoint is FREE — it returns creator IDs. Pass those IDs to "
-            "get_creator_profiles to fetch full profiles with details. "
-            "The 'nichesToPromote' filter is especially powerful for AI-analyzed niche matching "
-            "(e.g. 'SaaS', 'skincare', 'fitness supplements')."
+            "get_creator_profiles to fetch full profiles. "
+            "Start with 'nichesToPromote' — the primary discovery filter. It uses AI-analyzed "
+            "niche data that is very granular and specific: 'calorie counter', 'ai tools', "
+            "'standing desk', 'budget travel', 'new moms'. "
+            "IMPORTANT: nichesToPromote uses AND logic — always search ONE keyword per call "
+            "and run 5+ searches with different keywords, then merge results. "
+            "Use 'mainCategory' only as a fallback when niche terms aren't specific enough."
         ),
         "inputSchema": {
             "type": "object",
@@ -213,8 +215,11 @@ TOOLS = [
                 "nichesToPromote": {
                     "type": "string",
                     "description": (
-                        "AI-analyzed niches, comma-separated. Best discovery filter. "
-                        "Examples: 'SaaS', 'skincare,beauty', 'fitness supplements'"
+                        "AI-analyzed niches — the most powerful creator discovery filter. "
+                        "Free text, very granular: 'calorie counter', 'ai tools', 'standing desk', "
+                        "'budget travel', 'new moms'. ALWAYS pass ONE keyword only per call — "
+                        "this is an AND filter. Run 5+ separate searches with different keywords "
+                        "and combine the results for best coverage."
                     ),
                 },
                 "country": {
@@ -575,17 +580,27 @@ Use `search_viral_content` to discover viral TikTok posts.
 
 This is a **two-step workflow** to save credits:
 
-**Step 1 — Search (FREE):** Call `search_creators` with filters. This returns creator IDs, not full profiles. Use as many filters as relevant:
-- `mainCategory` — exact enum values like "Fashion", "Technology", "Fitness"
+**Step 1 — Search (FREE):** Call `search_creators` with filters. This returns creator IDs, not full profiles.
+
+**Start with `nichesToPromote`** — the primary discovery filter. It uses AI-analyzed niche data that is very granular. Think specific products and use cases, not broad categories:
+- `nichesToPromote=calorie counter` — calorie tracking / diet apps
+- `nichesToPromote=ai tools` — AI and productivity tools
+- `nichesToPromote=standing desk` — office / ergonomics products
+- `nichesToPromote=budget travel` — travel on a budget
+- `nichesToPromote=new moms` — parenting / baby products
+- `nichesToPromote=protein powder` — fitness supplements
+- `nichesToPromote=Shopify` — ecommerce creators
+
+Then narrow with additional filters:
 - `source` — "tiktok", "instagram", or "youtube"
-- `nichesToPromote` — the most powerful filter. AI-analyzed niches, free text. Examples: "SaaS", "skincare", "fitness supplements", "meal prep"
 - `country` — full country name (e.g. "France", "United States")
-- `language` — lowercase (e.g. "english", "spanish", "french")
 - `followersMin` / `followersMax` — follower range
 - `engagementRateMin` — percentage (e.g. 2.5 for 2.5%)
-- `hashtags` — comma-separated, AND matching (e.g. "fitness,gym" requires both)
-- `bio` — keyword search in bio text
+- `language` — lowercase (e.g. "english", "spanish", "french")
 - `emailExists` — set `true` to only get creators with contact email
+- `mainCategory` — broad category like "Fashion", "Technology" (use only when nichesToPromote isn't specific enough)
+- `bio` — keyword search in bio text
+- `hashtags` — AND matching, search one at a time
 
 **CRITICAL — AND matching for nichesToPromote, promotedProducts, and hashtags:**
 These fields use AND logic when comma-separated. Passing `nichesToPromote=skincare,beauty` only returns creators matching BOTH terms, which can return zero results. **Always search ONE keyword at a time** and combine the userIds from multiple searches. Since search is free, run 5+ narrow searches with different keywords to cast the widest net:
@@ -642,10 +657,11 @@ Multiple tools for song chart data. All cost **10 credits per request**.
 
 ## Tips for agents
 
-- **nichesToPromote is your best friend:** The most powerful filter for creator discovery. It uses AI-analyzed niche data and supports very specific free-text queries like `calorie counter`, `ai tools`, `standing desk`, `budget travel`. The data is granular — think specific products and use cases, not just broad categories.
-- **Run 5+ niche searches per query:** Since `nichesToPromote` is an AND filter and search is free, always run multiple searches with different keywords that describe the target from different angles. For example, for a skincare brand: `skincare`, `beauty routine`, `skin health`, `anti aging`, `dermatology`. Merge and deduplicate all results.
+- **Always start with nichesToPromote:** The primary filter for creator discovery. It uses AI-analyzed niche data that is very granular — specific products (`calorie counter`, `standing desk`), use cases (`meal prep`, `budget travel`), audiences (`new moms`, `college students`), and tools (`ChatGPT`, `Notion`, `Shopify`). Think specific, not broad.
+- **Run 5+ niche searches per query:** nichesToPromote is an AND filter. Always search ONE keyword per call and run at least 5 searches with different keywords describing the target from different angles. For a skincare brand: `skincare`, `beauty routine`, `skin health`, `anti aging`, `dermatology`. Merge and deduplicate all results. Search is free.
+- **Prefer nichesToPromote over mainCategory:** mainCategory is broad (e.g. "Technology" returns millions). nichesToPromote is granular (e.g. "ai tools" or "calorie counter" returns targeted results). Use mainCategory only as a fallback when you can't think of specific niche terms.
 - **Be credit-efficient:** Start with `search_creators` (free) before calling `get_creator_profiles`. Use smaller `pageSize` / `perPage` when exploring.
-- **Combine filters wisely:** Mix different filter types (category + followers + country) for targeted results, but keep AND text filters (nichesToPromote, promotedProducts, hashtags) to a single value per call.
+- **Combine filters wisely:** Mix nichesToPromote with followers + country + source for targeted results, but always keep nichesToPromote to a single keyword per call.
 - **Virality score:** A video with 1M views from a creator with 10K followers (score ~1.0) is far more impressive than 1M views from someone with 10M followers (score ~0.1).
 - **Country format matters:** Viral content and creators use full names ("United States"). Songs use codes ("US").
 """
