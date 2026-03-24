@@ -25,6 +25,29 @@ A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that g
 
 ## Setup
 
+### Claude Code (CLI)
+
+```bash
+claude mcp add --transport http topyappers https://mcp.topyappers.com \
+  --header "Authorization: Bearer YOUR_TOPYAPPERS_API_KEY"
+```
+
+Or add to `.mcp.json` in your project root:
+
+```json
+{
+  "mcpServers": {
+    "topyappers": {
+      "type": "http",
+      "url": "https://mcp.topyappers.com",
+      "headers": {
+        "Authorization": "Bearer YOUR_TOPYAPPERS_API_KEY"
+      }
+    }
+  }
+}
+```
+
 ### Cursor
 
 Add to your MCP settings (`.cursor/mcp.json`):

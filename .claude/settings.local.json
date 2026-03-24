@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__topyappers__search_creators",
+      "mcp__topyappers__get_creator_profiles"
+    ]
+  }
+}
