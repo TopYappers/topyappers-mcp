@@ -1,6 +1,6 @@
 # TopYappers MCP Server
 
-A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that gives AI agents access to the [TopYappers API](https://docs.topyappers.com) for discovering viral content, trending songs, and influencers.
+A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that gives AI agents access to the [TopYappers API](https://docs.topyappers.com) for discovering viral content, trending songs, influencers, and outreach agent email history.
 
 ## Available Tools
 
@@ -9,6 +9,9 @@ A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that g
 | `search_viral_content` | Find viral TikTok posts by category, country, views, virality score, dates, music, hooks | 1 credit/result |
 | `search_creators` | Search influencers across TikTok, Instagram, YouTube with 20+ filters | **Free** |
 | `get_creator_profiles` | Fetch full creator profiles by IDs | 1 credit/creator |
+| `list_agent_projects` | List outreach agent projects and campaign context | **Free** |
+| `list_contacted_creators` | List creators contacted via agent email, with reply/thread context | **Free** |
+| `list_agent_messages` | List sent and received outreach emails by creator, project, thread, or direction | **Free** |
 | `search_videos` | Search videos by engagement, hashtags, text | 1 credit/video |
 | `get_song_rankings` | Country or global song chart rankings | 10 credits |
 | `get_new_song_entries` | Newly charting songs for a country | 10 credits |
@@ -92,6 +95,7 @@ Detailed docs for each API domain:
 
 - [**Overview** — how it works, auth, credits](./docs/overview.md)
 - [**Creators & Influencers** — search workflow, parameters, power filters](./docs/creators.md)
+- [**Agent Outreach** — projects, contacted creators, sent messages, replies](./docs/agent-outreach.md)
 - [**Viral Content** — filters, virality score, use cases](./docs/viral-content.md)
 - [**Videos** — search, sort, engagement filters](./docs/videos.md)
 - [**Trending Songs** — rankings, new entries, history, comparisons](./docs/songs.md)
@@ -115,6 +119,12 @@ Detailed docs for each API domain:
 1. Call `get_song_rankings` with `country: "GB"`
 2. Get the latest chart with song titles, artists, ranks, and movement
 3. Call `get_song_history` for deeper analysis of a specific song
+
+### Draft a reply to a creator who emailed back
+
+1. Call `list_contacted_creators` with `creatorEmail: "creator@example.com"`
+2. Call `list_agent_messages` with the same `creatorEmail` and `direction: "all"`
+3. Use the original pitch, follow-ups, inbound reply, and project details to draft a customized response
 
 ## Rate Limits
 
