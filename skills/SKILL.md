@@ -1,11 +1,11 @@
 ---
 name: topyappers
-description: TopYappers — social media intelligence for AI agents. Discover viral TikTok content, search 30M+ creators across TikTok/Instagram/YouTube, and track trending song charts. Use when the user asks about influencers, creators, viral content, trending songs, or social media data.
+description: TopYappers — social media intelligence for AI agents. Discover viral TikTok content, search 30M+ creators across TikTok/Instagram/YouTube, track trending song charts, and inspect outreach email history. Use when the user asks about influencers, creators, viral content, trending songs, outreach messages, or social media data.
 ---
 
 # TopYappers MCP
 
-Social media intelligence for AI agents. Access viral content discovery, influencer search across TikTok, Instagram & YouTube, and trending song charts — all through a single MCP connection.
+Social media intelligence for AI agents. Access viral content discovery, influencer search across TikTok, Instagram & YouTube, trending song charts, and outreach agent email history — all through a single MCP connection.
 
 ## Setup
 
@@ -45,12 +45,15 @@ This package includes 4 specialized skills for each API domain:
 - **[search-videos](search-videos/SKILL.md)** — Find videos by engagement metrics, hashtags, text search, and sort by views/likes/shares.
 - **[trending-songs](trending-songs/SKILL.md)** — Chart rankings, new entries, song search, history tracking, and week-over-week comparisons across 44 countries.
 
-## 11 MCP Tools
+## 14 MCP Tools
 
 | Tool | Description | Cost |
 |------|-------------|------|
 | `search_creators` | Search influencers with 20+ filters | **Free** |
 | `get_creator_profiles` | Full profiles — followers, engagement, email, bio, niches | 1 credit/creator |
+| `list_agent_projects` | Outreach projects and campaign context | **Free** |
+| `list_contacted_creators` | Creators contacted via email, with reply/thread context | **Free** |
+| `list_agent_messages` | Sent and received outreach emails | **Free** |
 | `search_viral_content` | Viral TikTok posts by category, country, virality score | 1 credit/result |
 | `search_videos` | Videos by engagement, hashtags, text | 1 credit/video |
 | `get_song_rankings` | Country or global chart rankings | 10 credits |
@@ -83,6 +86,9 @@ Views ÷ followers, normalized 0–1. Use `0.3+` for quality, `0.5+` for highly 
 
 ### Song week format
 ISO format: `YYYY-Www` (e.g. `"2026-W04"`). Use `get_song_weeks` to discover available weeks.
+
+### Outreach reply workflow
+When the user has an inbox email and needs context, call `list_contacted_creators` with `creatorEmail`, then `list_agent_messages` with the same email and `direction: "all"`. Use `list_agent_projects` to map project IDs to campaign context.
 
 ## Rate Limits
 

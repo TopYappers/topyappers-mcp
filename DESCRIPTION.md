@@ -1,6 +1,6 @@
 # TopYappers
 
-Social media intelligence for AI agents. Access viral content discovery, influencer search across TikTok, Instagram & YouTube, and trending song charts — all through a single MCP connection.
+Social media intelligence for AI agents. Access viral content discovery, influencer search across TikTok, Instagram & YouTube, trending song charts, and TopYappers outreach agent email history — all through a single MCP connection.
 
 ## What it does
 
@@ -9,6 +9,7 @@ TopYappers gives AI agents real-time access to social media data across three do
 - **Viral Content** — Discover trending TikTok posts filtered by category, country, virality score (views÷followers), date range, music/sound, and opening hooks. Understand what's going viral and why.
 - **Creators & Influencers** — Search a database of 30M+ creators across TikTok, Instagram, and YouTube using 20+ filters including AI-analyzed niches, promoted products, follower ranges, engagement rates, country, language, and hashtags. Creator search is free — you only pay when fetching full profiles.
 - **Trending Songs** — Access weekly song chart rankings by country, track new chart entries, search by title or artist, view historical performance, and compare charts week-over-week.
+- **Agent Outreach** — Inspect your own outreach projects, contacted creators, sent emails, and creator replies so AI can draft informed follow-ups from inbox context.
 
 ## Tools
 
@@ -17,6 +18,9 @@ TopYappers gives AI agents real-time access to social media data across three do
 | `search_viral_content` | Find viral TikTok posts by category, country, views, virality score, dates, music, hooks | 1 credit/result |
 | `search_creators` | Search influencers across TikTok, Instagram, YouTube with 20+ filters | **Free** |
 | `get_creator_profiles` | Fetch full creator profiles — followers, engagement, email, bio, niches, promoted products | 1 credit/creator |
+| `list_agent_projects` | List outreach projects and campaign context | **Free** |
+| `list_contacted_creators` | List creators contacted via email, with reply and thread context | **Free** |
+| `list_agent_messages` | List sent and received outreach emails by creator, project, thread, or direction | **Free** |
 | `search_videos` | Search videos by engagement metrics, hashtags, text in descriptions | 1 credit/video |
 | `get_song_rankings` | Country or global trending song chart rankings | 10 credits |
 | `get_new_song_entries` | Newly charting songs that just entered rankings | 10 credits |
@@ -31,6 +35,7 @@ TopYappers gives AI agents real-time access to social media data across three do
 - **Influencer marketing** — Find creators in specific niches who match a brand's target audience, with contact emails and engagement data
 - **Content strategy** — Analyze what's going viral in your category to inform content creation
 - **Trend monitoring** — Track trending songs and sounds before they peak, ideal for music marketing and content timing
+- **Reply personalization** — Turn an inbox email into creator, campaign, thread, and prior-message context for better follow-ups
 - **Competitive intelligence** — Discover which products competitors are promoting through influencers
 - **Market research** — Understand engagement patterns across countries, categories, and platforms
 

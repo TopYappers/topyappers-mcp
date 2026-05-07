@@ -1,11 +1,11 @@
 ---
 name: topyappers
-description: TopYappers social media intelligence — overview of all available MCP tools for discovering viral content, searching creators/influencers, and tracking trending songs across TikTok, Instagram, and YouTube. Use when the user asks about TopYappers, what tools are available, how the API works, or needs help choosing the right tool.
+description: TopYappers social media intelligence — overview of all available MCP tools for discovering viral content, searching creators/influencers, tracking trending songs, and inspecting outreach email history. Use when the user asks about TopYappers, what tools are available, how the API works, outreach messages, or needs help choosing the right tool.
 ---
 
 # TopYappers MCP — Overview
 
-You have access to the TopYappers API through MCP. It provides **social media intelligence** across three domains.
+You have access to the TopYappers API through MCP. It provides **social media intelligence** across four domains.
 
 ## Setup
 
@@ -55,12 +55,20 @@ Weekly chart rankings, new entries, song search, history, and week-over-week com
 
 **Tools:** `get_song_rankings`, `get_new_song_entries`, `search_songs`, `get_song_history`, `compare_song_rankings`, `get_song_countries`, `get_song_weeks` — 10 credits each
 
+### 4. Agent Outreach
+Inspect your own outreach projects, contacted creators, sent emails, and creator replies.
+
+**Tools:** `list_agent_projects`, `list_contacted_creators`, `list_agent_messages` — **FREE**
+
 ## Credit Cost Summary
 
 | Tool | Cost |
 |------|------|
 | `search_creators` | **Free** |
 | `get_creator_profiles` | 1 credit per creator |
+| `list_agent_projects` | **Free** |
+| `list_contacted_creators` | **Free** |
+| `list_agent_messages` | **Free** |
 | `search_viral_content` | 1 credit per result |
 | `search_videos` | 1 credit per video |
 | All song tools | 10 credits per request |

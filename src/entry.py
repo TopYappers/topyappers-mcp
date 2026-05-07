@@ -295,6 +295,126 @@ TOOLS = [
         "annotations": {"readOnlyHint": True, "openWorldHint": True},
     },
     {
+        "name": "list_agent_projects",
+        "description": (
+            "List the user's TopYappers outreach agent projects/campaigns. "
+            "Use this to map project IDs from message history to campaign details, "
+            "targeting, deal terms, and custom instructions. Free — does not consume credits."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "properties": {},
+        },
+        "annotations": {"readOnlyHint": True, "openWorldHint": False},
+    },
+    {
+        "name": "list_contacted_creators",
+        "description": (
+            "List creators who have been contacted by the user's outreach agent via email. "
+            "Filter by exact creator email from an inbox, creator ID, or project ID. "
+            "Returns creator identity, project IDs, Gmail thread IDs, sent count, reply count, "
+            "reply status, and latest outreach preview. Free — does not consume credits."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "projectId": {
+                    "type": "string",
+                    "description": "Filter to one agent project ID",
+                },
+                "creatorEmail": {
+                    "type": "string",
+                    "description": "Case-insensitive exact creator email match",
+                },
+                "creatorEmailContains": {
+                    "type": "string",
+                    "description": "Case-insensitive partial creator email match",
+                },
+                "creatorId": {
+                    "type": "string",
+                    "description": "Filter by creator ID",
+                },
+                "page": {
+                    "type": "integer",
+                    "description": "Page number (default: 1)",
+                    "default": 1,
+                },
+                "perPage": {
+                    "type": "integer",
+                    "description": "Results per page (default: 50, max: 100)",
+                    "default": 50,
+                },
+            },
+        },
+        "annotations": {"readOnlyHint": True, "openWorldHint": False},
+    },
+    {
+        "name": "list_agent_messages",
+        "description": (
+            "List saved outreach agent email messages. Use creatorEmail/email from an inbox "
+            "to retrieve the full conversation history before drafting a customized reply. "
+            "Can return outbound sent emails and inbound creator replies. "
+            "Free — does not consume credits."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "projectId": {
+                    "type": "string",
+                    "description": "Filter to one agent project ID",
+                },
+                "creatorEmail": {
+                    "type": "string",
+                    "description": "Case-insensitive exact creator email match",
+                },
+                "creatorEmailContains": {
+                    "type": "string",
+                    "description": "Case-insensitive partial creator email match",
+                },
+                "creatorId": {
+                    "type": "string",
+                    "description": "Filter by creator ID",
+                },
+                "threadId": {
+                    "type": "string",
+                    "description": "Filter by Gmail thread ID",
+                },
+                "gmailAccountId": {
+                    "type": "string",
+                    "description": "Filter by connected Gmail account ID",
+                },
+                "direction": {
+                    "type": "string",
+                    "enum": ["all", "outbound", "inbound"],
+                    "description": (
+                        "Message direction. Use outbound for sent emails, "
+                        "inbound for replies. Default: all."
+                    ),
+                    "default": "all",
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Filter by stored message status, e.g. sent, received, replied, failed",
+                },
+                "isFollowUp": {
+                    "type": "boolean",
+                    "description": "Filter follow-up emails",
+                },
+                "page": {
+                    "type": "integer",
+                    "description": "Page number (default: 1)",
+                    "default": 1,
+                },
+                "perPage": {
+                    "type": "integer",
+                    "description": "Results per page (default: 50, max: 100)",
+                    "default": 50,
+                },
+            },
+        },
+        "annotations": {"readOnlyHint": True, "openWorldHint": False},
+    },
+    {
         "name": "search_videos",
         "description": (
             "Search for video content from TikTok, Instagram, and YouTube. "
@@ -560,7 +680,7 @@ def tool_result(text, is_error=False):
 
 INSTRUCTIONS = """# TopYappers MCP — Agent Guide
 
-You have access to the TopYappers API through this MCP server. It lets you discover **viral content**, **trending songs**, and **influencers/creators** across TikTok, Instagram, and YouTube.
+You have access to the TopYappers API through this MCP server. It lets you discover **viral content**, **trending songs**, and **influencers/creators** across TikTok, Instagram, and YouTube. It also lets you inspect your own **outreach agent projects and email history** so you can reason about creator replies with context.
 
 ## 1. Finding Viral Content
 
@@ -645,12 +765,27 @@ Multiple tools for song chart data. All cost **10 credits per request**.
 
 **Important:** Song tools use **country codes** (e.g. "US", "GB", "FR"), NOT full names. Use `get_song_countries` to discover valid codes. Weeks use ISO format: "YYYY-Www" (e.g. "2026-W04").
 
+## 5. Agent Outreach Messages
+
+Use these tools when the user asks about messages sent by the TopYappers outreach agent, creators who replied, or how to respond to an email in their inbox.
+
+**Common workflow for an inbox reply:**
+1. Call `list_contacted_creators` with `creatorEmail` set to the email address from the inbox.
+2. Call `list_agent_messages` with the same `creatorEmail` and `direction: "all"` to retrieve sent emails and inbound replies.
+3. Call `list_agent_projects` if you need to map `project_id` to campaign details, target audience, deal terms, or custom outreach instructions.
+4. Optionally call `search_creators` with `email` or `get_creator_profiles` with the returned `creator_id` if you need public creator profile data.
+
+**Important:** `list_agent_messages` returns plain-text bodies. Use the newest inbound message plus the earlier outbound context to draft a specific reply. These outreach tools are free and do not consume credits.
+
 ## Credit costs summary
 
 | Tool | Cost |
 |------|------|
 | search_creators | FREE |
 | get_creator_profiles | 1 credit per creator |
+| list_agent_projects | FREE |
+| list_contacted_creators | FREE |
+| list_agent_messages | FREE |
 | search_viral_content | 1 credit per result |
 | search_videos | 1 credit per video |
 | All song tools | 10 credits per request |
@@ -745,6 +880,20 @@ PROMPTS = [
                 "name": "platform",
                 "description": "Platform: tiktok, instagram, or youtube",
                 "required": False,
+            },
+        ],
+    },
+    {
+        "name": "creator_reply_context",
+        "description": (
+            "Look up outreach history for a creator email and prepare context "
+            "for a customized reply."
+        ),
+        "arguments": [
+            {
+                "name": "creator_email",
+                "description": "The creator's email address from the inbox",
+                "required": True,
             },
         ],
     },
@@ -857,6 +1006,28 @@ def _render_prompt(name, arguments):
                         f"5. Then search_creators with the same mainCategory and similar "
                         f"follower range to find comparable creators in their space.\n"
                         f"6. Summarize findings with actionable insights."
+                    ),
+                },
+            }
+        ]
+
+    if name == "creator_reply_context":
+        creator_email = args.get("creator_email", "")
+        return [
+            {
+                "role": "user",
+                "content": {
+                    "type": "text",
+                    "text": (
+                        f"Prepare reply context for creator email '{creator_email}':\n\n"
+                        f"1. Call list_contacted_creators with creatorEmail: '{creator_email}'.\n"
+                        f"2. Call list_agent_messages with creatorEmail: '{creator_email}', "
+                        f"direction: 'all', perPage: 50.\n"
+                        f"3. Call list_agent_projects if you need to map any project_id to campaign "
+                        f"details, deal terms, or custom instructions.\n"
+                        f"4. Summarize the relationship so far: original pitch, follow-ups, "
+                        f"creator replies, open questions, and likely next best response.\n"
+                        f"5. Draft a concise customized reply that references the actual context."
                     ),
                 },
             }
@@ -986,6 +1157,17 @@ _CREATOR_SEARCH_KEYS = [
     "language", "hashtags", "emailExists", "email", "page", "perPage",
 ]
 
+_AGENT_CONTACTED_CREATOR_KEYS = [
+    "projectId", "creatorEmail", "creatorEmailContains", "creatorId",
+    "page", "perPage",
+]
+
+_AGENT_MESSAGE_KEYS = [
+    "projectId", "creatorEmail", "creatorEmailContains", "creatorId",
+    "threadId", "gmailAccountId", "direction", "status", "isFollowUp",
+    "page", "perPage",
+]
+
 _VIDEO_SEARCH_KEYS = [
     "userHandle", "userFollowersMin", "userFollowersMax",
     "viewsMin", "viewsMax", "likesMin", "likesMax",
@@ -1023,6 +1205,29 @@ async def handle_get_creator_profiles(args, api_key):
             is_error=True,
         )
     data, err = await api_post("/api/v2/creators/get", {"userIds": user_ids}, api_key)
+    if err:
+        return tool_result(err, is_error=True)
+    return tool_result(json.dumps(data, indent=2))
+
+
+async def handle_list_agent_projects(args, api_key):
+    data, err = await api_get("/api/v1/agent/projects", {}, api_key)
+    if err:
+        return tool_result(err, is_error=True)
+    return tool_result(json.dumps(data, indent=2))
+
+
+async def handle_list_contacted_creators(args, api_key):
+    params = _pick(args, _AGENT_CONTACTED_CREATOR_KEYS)
+    data, err = await api_get("/api/v1/agent/contacted-creators", params, api_key)
+    if err:
+        return tool_result(err, is_error=True)
+    return tool_result(json.dumps(data, indent=2))
+
+
+async def handle_list_agent_messages(args, api_key):
+    params = _pick(args, _AGENT_MESSAGE_KEYS)
+    data, err = await api_get("/api/v1/agent/messages", params, api_key)
     if err:
         return tool_result(err, is_error=True)
     return tool_result(json.dumps(data, indent=2))
@@ -1109,6 +1314,9 @@ TOOL_HANDLERS = {
     "search_viral_content": handle_search_viral_content,
     "search_creators": handle_search_creators,
     "get_creator_profiles": handle_get_creator_profiles,
+    "list_agent_projects": handle_list_agent_projects,
+    "list_contacted_creators": handle_list_contacted_creators,
+    "list_agent_messages": handle_list_agent_messages,
     "search_videos": handle_search_videos,
     "get_song_rankings": handle_get_song_rankings,
     "get_new_song_entries": handle_get_new_song_entries,
