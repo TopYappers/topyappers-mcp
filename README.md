@@ -28,10 +28,23 @@ A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that g
 
 ## Setup
 
+### Claude Web/Desktop Custom Connector (OAuth)
+
+Use these values when adding TopYappers as a hosted custom connector:
+
+| Field | Value |
+|------|-------|
+| Connector URL | `https://mcp.topyappers.com/mcp` |
+| Auth type | OAuth |
+| Client ID | `myapp-claude` |
+| Client Secret | `YOUR_TOPYAPPERS_API_KEY` |
+
+Claude will ask you to connect; click **Connect**. The OAuth flow is a proxy shim for Claude's connector UI: your TopYappers API key is used as the OAuth client secret, and the server returns it as the MCP bearer access token.
+
 ### Claude Code (CLI)
 
 ```bash
-claude mcp add --transport http topyappers https://mcp.topyappers.com \
+claude mcp add --transport http topyappers https://mcp.topyappers.com/mcp \
   --header "Authorization: Bearer YOUR_TOPYAPPERS_API_KEY"
 ```
 
@@ -42,7 +55,7 @@ Or add to `.mcp.json` in your project root:
   "mcpServers": {
     "topyappers": {
       "type": "http",
-      "url": "https://mcp.topyappers.com",
+      "url": "https://mcp.topyappers.com/mcp",
       "headers": {
         "Authorization": "Bearer YOUR_TOPYAPPERS_API_KEY"
       }
@@ -59,7 +72,7 @@ Add to your MCP settings (`.cursor/mcp.json`):
 {
   "mcpServers": {
     "topyappers": {
-      "url": "https://mcp.topyappers.com",
+      "url": "https://mcp.topyappers.com/mcp",
       "headers": {
         "Authorization": "Bearer YOUR_TOPYAPPERS_API_KEY"
       }
@@ -76,7 +89,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 {
   "mcpServers": {
     "topyappers": {
-      "url": "https://mcp.topyappers.com",
+      "url": "https://mcp.topyappers.com/mcp",
       "headers": {
         "Authorization": "Bearer YOUR_TOPYAPPERS_API_KEY"
       }
@@ -87,7 +100,9 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 
 ## Authentication
 
-Pass your TopYappers API key as a Bearer token in the `Authorization` header. The server forwards it to the TopYappers API — no keys are stored on the server.
+For non-Claude MCP clients, use the MCP endpoint `https://mcp.topyappers.com/mcp` and pass your TopYappers API key as a Bearer token in the `Authorization` header. The server also accepts `X-API-Key`, `X-MyApp-API-Key`, and `Api-Key` headers.
+
+The root URL `https://mcp.topyappers.com` is a clean human/info endpoint. Browser `GET /mcp` intentionally returns `405 Method Not Allowed`; MCP clients should `POST` JSON-RPC messages to `/mcp`.
 
 ## Documentation
 

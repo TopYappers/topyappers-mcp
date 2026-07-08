@@ -40,7 +40,7 @@ claude mcp add --transport http topyappers https://mcp.topyappers.com \
 
 This package includes 4 specialized skills for each API domain:
 
-- **[find-creators](find-creators/SKILL.md)** — Search 30M+ creators with 20+ filters (category, niche, followers, engagement, country, platform). Free search + paid profiles.
+- **[find-creators](find-creators/SKILL.md)** — Search 30M+ creators with 20+ filters (category, niche, followers, views, gender, ethnicity/race, country, platform). Free search + paid profiles.
 - **[find-viral-content](find-viral-content/SKILL.md)** — Discover viral TikTok posts by category, country, virality score, date range, music, and hooks.
 - **[search-videos](search-videos/SKILL.md)** — Find videos by engagement metrics, hashtags, text search, and sort by views/likes/shares.
 - **[trending-songs](trending-songs/SKILL.md)** — Chart rankings, new entries, song search, history tracking, and week-over-week comparisons across 44 countries.
@@ -80,6 +80,9 @@ The most powerful filter. It uses AI-analyzed niche data that is very granular �
 1. `search_creators` (free) with `nichesToPromote` → run 5+ searches with different keywords
 2. Deduplicate all userIds across searches
 3. `get_creator_profiles` (1 credit each) → only for the ones you need
+
+### Demographic filters
+Use lowercase API values. `gender` is `"male"` or `"female"`. For Latino, Latina, or Hispanic requests, pass `race: "latino hispanic"`.
 
 ### Virality score
 Views ÷ followers, normalized 0–1. Use `0.3+` for quality, `0.5+` for highly viral, `0.7+` for breakout content.

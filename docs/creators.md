@@ -24,20 +24,29 @@ Returns an array of creator IDs (e.g. `["instagram_57971538386", "tiktok_12345"]
 | `followersMax` | integer | Maximum followers | `1000000` |
 | `averageViewsMin` | integer | Minimum average views per post | `5000` |
 | `averageViewsMax` | integer | Maximum average views per post | `500000` |
+| `averageLikesMin` | integer | Minimum average likes per post | `1000` |
+| `averageLikesMax` | integer | Maximum average likes per post | `50000` |
 | `engagementRateMin` | number | Minimum engagement rate (%) | `2.5` |
 | `engagementRateMax` | number | Maximum engagement rate (%) | `10` |
 | `age` | string | Age group, comma-separated | `"20-29,30-39"` |
 | `gender` | string | `"male"` or `"female"` | `"female"` |
+| `race` | string | Ethnicity/race, comma-separated. Use `"latino hispanic"` for Latino/Hispanic | `"latino hispanic"` |
+| `hairColor` | string | Hair color, comma-separated | `"black,brunette"` |
+| `bodyComplexion` | string | Body type, comma-separated | `"ordinary"` |
 | `mainCategory` | string | Content category ([see values](./reference.md#categories)) | `"Fashion"` |
-| `subCategory` | string | Sub-category, free text | `"streetwear"` |
+| `subCategories` | string | Sub-categories, comma-separated free text | `"streetwear"` |
 | `bio` | string | Keywords in creator's bio | `"tiktok shop"` |
 | `promotedProducts` | string | Products creator promoted, comma-separated | `"beef tallow,feastables"` |
 | `nichesToPromote` | string | AI-analyzed niches, comma-separated | `"SaaS,skincare"` |
+| `promotedBusinessType` | string | Business type the creator is suitable to promote | `"B2C apps"` |
+| `accountType` | string | Account type: `"faceless"`, `"ugc"`, `"agc"`, `"clipper"`, `"brand"` | `"ugc"` |
 | `country` | string | Full country name ([see values](./reference.md#countries)) | `"France"` |
 | `source` | string | `"tiktok"`, `"instagram"`, or `"youtube"` | `"instagram"` |
 | `username` | string | Creator handle | `"mrbeast"` |
 | `language` | string | Content language ([see values](./reference.md#languages)) | `"english"` |
 | `hashtags` | string | Hashtags, comma-separated (AND match) | `"fitness,gym"` |
+| `keywords` | string | General keyword search across searchable creator fields, comma-separated OR match | `"pilates,yoga"` |
+| `keywordsExcluded` | string | Keywords to exclude from text searches | `"crypto"` |
 | `emailExists` | boolean | Only creators with email available | `true` |
 | `email` | string | Find by exact email | `"john@example.com"` |
 | `page` | integer | Page number (default: 1) | `1` |
@@ -90,7 +99,7 @@ Use `next_page` and `total_pages` for pagination. When `next_page` is `0`, there
       "age": "20-29",
       "gender": "female",
       "mainCategory": "fashion",
-      "subCategory": "streetwear",
+      "subCategories": ["streetwear"],
       "bio": "Fashion creator sharing streetwear fits",
       "promotedProducts": ["beef tallow"],
       "nichesToPromote": ["fashion", "streetwear"],
@@ -168,6 +177,10 @@ Find creators who have promoted specific products. For example, `promotedProduct
 Comma-separated, uses AND matching — all specified hashtags must be present in the creator's content. The `#` prefix is optional and stripped automatically.
 
 > **Important: AND matching applies here too.** `hashtags=fitness,gym` only returns creators who use BOTH #fitness AND #gym. For broader results, search one hashtag per call and merge the results.
+
+### Demographics
+
+Use lowercase API values. `gender` accepts `male` or `female`. `race` accepts `latino hispanic`, `middle eastern`, `indian`, `east asian`, `white`, `black`, and `southeast asian`; use `latino hispanic` when a user says Latino, Latina, or Hispanic.
 
 ### General tip for all AND filters
 
