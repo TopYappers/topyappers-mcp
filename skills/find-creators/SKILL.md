@@ -53,20 +53,29 @@ Pass the collected `userIds` to `get_creator_profiles` to get full profiles with
 | `followersMax` | integer | Maximum followers | `1000000` |
 | `averageViewsMin` | integer | Minimum average views per post | `5000` |
 | `averageViewsMax` | integer | Maximum average views per post | `500000` |
+| `averageLikesMin` | integer | Minimum average likes per post | `1000` |
+| `averageLikesMax` | integer | Maximum average likes per post | `50000` |
 | `engagementRateMin` | number | Minimum engagement rate (%) | `2.5` |
 | `engagementRateMax` | number | Maximum engagement rate (%) | `10` |
 | `age` | string | Age group, comma-separated | `"20-29,30-39"` |
 | `gender` | string | `"male"` or `"female"` | `"female"` |
+| `race` | string | Ethnicity/race. Use `"latino hispanic"` for Latino/Hispanic | `"latino hispanic"` |
+| `hairColor` | string | Hair color, comma-separated | `"black,brunette"` |
+| `bodyComplexion` | string | Body type, comma-separated | `"ordinary"` |
 | `mainCategory` | string | Content category (use exact enum values) | `"Fashion"` |
-| `subCategory` | string | Sub-category, free text | `"streetwear"` |
+| `subCategories` | string | Sub-categories, comma-separated free text | `"streetwear"` |
 | `bio` | string | Keywords in creator's bio | `"tiktok shop"` |
 | `promotedProducts` | string | Products creator promoted | `"beef tallow"` |
 | `nichesToPromote` | string | AI-analyzed niches (free text) | `"skincare"` |
+| `promotedBusinessType` | string | Business type the creator is suitable to promote | `"B2C apps"` |
+| `accountType` | string | Account type: `"faceless"`, `"ugc"`, `"agc"`, `"clipper"`, `"brand"` | `"ugc"` |
 | `country` | string | Full country name | `"France"` |
 | `source` | string | Platform | `"instagram"` |
 | `username` | string | Creator handle | `"mrbeast"` |
 | `language` | string | Content language (lowercase) | `"english"` |
 | `hashtags` | string | Hashtags (AND match) | `"fitness"` |
+| `keywords` | string | General keyword search across searchable creator fields, comma-separated OR match | `"pilates,yoga"` |
+| `keywordsExcluded` | string | Keywords to exclude from text searches | `"crypto"` |
 | `emailExists` | boolean | Only creators with email | `true` |
 | `email` | string | Find by exact email | `"john@example.com"` |
 | `page` | integer | Page number (default: 1) | `1` |
@@ -130,13 +139,17 @@ Example: `promotedProducts=ChatGPT` finds creators who promoted ChatGPT.
 ### hashtags
 The `#` prefix is optional and stripped automatically. Uses AND matching — search one at a time.
 
+### Demographics
+Use lowercase API values. `gender` accepts `male` or `female`. `race` accepts `latino hispanic`, `middle eastern`, `indian`, `east asian`, `white`, `black`, and `southeast asian`; use `latino hispanic` when the user says Latino, Latina, or Hispanic.
+
 ## Profile Response Fields
 
 When you call `get_creator_profiles`, each profile includes:
 - `id`, `username`, `source` — identity
 - `followers`, `averageViews`, `engagementRate` — metrics
 - `age`, `gender` — demographics
-- `mainCategory`, `subCategory` — content classification
+- `race` — ethnicity/race classification when available
+- `mainCategory`, `subCategories` — content classification
 - `bio` — creator's bio text
 - `promotedProducts` — array of products they've promoted
 - `nichesToPromote` — AI-analyzed niches

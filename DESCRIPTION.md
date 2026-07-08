@@ -49,7 +49,11 @@ TopYappers gives AI agents real-time access to social media data across three do
 
 ## Authentication
 
-Requires a TopYappers API key passed as a Bearer token in the `Authorization` header. Get a key at [topyappers.com/profile](https://www.topyappers.com/profile).
+Use `https://mcp.topyappers.com/mcp` as the hosted MCP connector URL.
+
+For Claude Web/Desktop custom connectors, choose OAuth with client ID `myapp-claude` and use your TopYappers API key as the client secret. This OAuth flow is a connector shim: the API key becomes the MCP bearer access token.
+
+Other MCP clients can pass the same API key as a Bearer token in the `Authorization` header. Get a key at [topyappers.com/profile](https://www.topyappers.com/profile).
 
 ## Links
 

@@ -9,13 +9,31 @@ The TopYappers MCP server gives AI agents access to the [TopYappers API](https:/
 
 ## Authentication
 
-The MCP uses **Bearer token authentication**. Your TopYappers API key is passed as:
+Hosted MCP clients should use the dedicated transport endpoint:
+
+```
+https://mcp.topyappers.com/mcp
+```
+
+The root URL remains a human/info endpoint. Browser `GET /mcp` returns `405 Method Not Allowed`; MCP clients should `POST` JSON-RPC messages to `/mcp`.
+
+For Claude Web/Desktop custom connectors, use OAuth with:
+
+| Field | Value |
+|------|-------|
+| Connector URL | `https://mcp.topyappers.com/mcp` |
+| Client ID | `myapp-claude` |
+| Client Secret | `<your-topyappers-api-key>` |
+
+This OAuth flow is a Claude-compatible proxy shim. The API key is used as the OAuth client secret and returned as the MCP bearer access token.
+
+For other MCP clients, pass your TopYappers API key as:
 
 ```
 Authorization: Bearer <your-topyappers-api-key>
 ```
 
-The server extracts it and forwards it to the TopYappers API as the `x-ty-api-key` header. No keys are stored on the server.
+The server also accepts `X-API-Key`, `X-MyApp-API-Key`, and `Api-Key`. It forwards the key to the TopYappers API as the `x-ty-api-key` header. No keys are stored on the server.
 
 ## Credits & Pricing
 
