@@ -34,7 +34,7 @@ This is a **two-step workflow** to save credits:
 - `nichesToPromote=Shopify` — ecommerce creators
 
 Then narrow with additional filters:
-- `source` — "tiktok", "instagram", or "youtube"
+- `source` — "tiktok", "instagram", "youtube", "linkedin", or "twitter" (X/Twitter)
 - `country` — full country name (e.g. "France", "United States")
 - `followersMin` / `followersMax` — follower range
 - `averageViewsMin` / `averageViewsMax` — average post/video view range; use `averageViewsMin: 100000` for "100k+ views"
@@ -126,4 +126,3 @@ Use these tools when the user asks about messages sent by the TopYappers outreac
 - **Virality score:** A video with 1M views from a creator with 10K followers (score ~1.0) is far more impressive than 1M views from someone with 10M followers (score ~0.1).
 - **Country format matters:** Viral content and creators use full names ("United States"). Songs use codes ("US").
 """
-

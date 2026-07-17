@@ -188,7 +188,7 @@ When you call `get_creator_profiles`, each profile includes:
 Arts, Automotive, Beauty & Personal Care, Books & Literature, Business, Finance, Career & Jobs, Collectibles & Hobbies, Community, Ecommerce, Crafts & DIY, Culture, Education, Technology, Entertainment, Environment, Family, Parenting, Fashion, Film, Fitness, Health, Food, Gaming, Gardening & Agriculture, History, Home, Humor, Law, Government, Lifestyle, Marketing, Mental Health, Music, News & Media, Outdoors, Nature, Pets, Animals, Philosophy, Spirituality, Photography, Videography, Politics, Relationships, Religion, Science, Self-Improvement, Shopping, Social Media, Social Issues & Activism, Sports, Travel, Vehicles & Transportation, Virtual Reality, Weapons & Defense, Writing, Kids
 
 ## Available Platforms
-`tiktok`, `instagram`, `youtube`
+`tiktok`, `instagram`, `youtube`, `linkedin`, `twitter` (X/Twitter)
 
 ## Countries
 Use **full country names** (not codes). Examples: `"United States"`, `"France"`, `"United Kingdom"`, `"Germany"`, `"Australia"`, `"Japan"`, `"Brazil"`, `"Canada"`, `"India"`, `"South Korea"`

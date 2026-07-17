@@ -7,7 +7,7 @@ A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that g
 | Tool | Description | Cost |
 |------|-------------|------|
 | `search_viral_content` | Find viral TikTok posts by category, country, views, virality score, dates, music, hooks | 1 credit/result |
-| `search_creators` | Search influencers across TikTok, Instagram, YouTube with 20+ filters | **Free** |
+| `search_creators` | Search influencers across TikTok, Instagram, YouTube, LinkedIn, and X/Twitter with 20+ filters | **Free** |
 | `get_creator_profiles` | Fetch full creator profiles by IDs | 1 credit/creator |
 | `list_agent_projects` | List outreach agent projects and campaign context | **Free** |
 | `list_contacted_creators` | List creators contacted via agent email, with reply/thread context | **Free** |

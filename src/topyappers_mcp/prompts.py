@@ -34,7 +34,7 @@ PROMPTS = [
             },
             {
                 "name": "platform",
-                "description": "Preferred platform: tiktok, instagram, or youtube",
+                "description": "Preferred platform: tiktok, instagram, youtube, linkedin, or twitter (X/Twitter)",
                 "required": False,
             },
             {
@@ -72,7 +72,7 @@ PROMPTS = [
             },
             {
                 "name": "platform",
-                "description": "Platform: tiktok, instagram, or youtube",
+                "description": "Platform: tiktok, instagram, youtube, linkedin, or twitter (X/Twitter)",
                 "required": False,
             },
         ],
@@ -233,4 +233,3 @@ def render_prompt(name, arguments):
             "content": {"type": "text", "text": f"Unknown prompt: {name}"},
         }
     ]
-

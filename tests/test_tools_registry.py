@@ -29,7 +29,15 @@ class ToolsRegistryTests(unittest.TestCase):
         self.assertIn("search_creators", names)
         self.assertIn("get_song_weeks", names)
 
+    def test_creator_search_supports_all_creator_platforms(self):
+        search_creators = next(tool for tool in TOOLS if tool["name"] == "search_creators")
+        source_schema = search_creators["inputSchema"]["properties"]["source"]
+
+        self.assertEqual(
+            source_schema["enum"],
+            ["tiktok", "instagram", "youtube", "linkedin", "twitter"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
-

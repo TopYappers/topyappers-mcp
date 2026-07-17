@@ -41,7 +41,7 @@ Returns an array of creator IDs (e.g. `["instagram_57971538386", "tiktok_12345"]
 | `promotedBusinessType` | string | Business type the creator is suitable to promote | `"B2C apps"` |
 | `accountType` | string | Account type: `"faceless"`, `"ugc"`, `"agc"`, `"clipper"`, `"brand"` | `"ugc"` |
 | `country` | string | Full country name ([see values](./reference.md#countries)) | `"France"` |
-| `source` | string | `"tiktok"`, `"instagram"`, or `"youtube"` | `"instagram"` |
+| `source` | string | `"tiktok"`, `"instagram"`, `"youtube"`, `"linkedin"`, or `"twitter"` (X/Twitter) | `"instagram"` |
 | `username` | string | Creator handle | `"mrbeast"` |
 | `language` | string | Content language ([see values](./reference.md#languages)) | `"english"` |
 | `hashtags` | string | Hashtags, comma-separated (AND match) | `"fitness,gym"` |
