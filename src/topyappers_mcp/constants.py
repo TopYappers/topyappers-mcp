@@ -27,7 +27,7 @@ CATEGORIES = [
     "Writing", "Kids",
 ]
 
-SOURCES = ["tiktok", "instagram", "youtube"]
+SOURCES = ["tiktok", "instagram", "youtube", "linkedin", "twitter"]
 GENDERS = ["male", "female"]
 RACES = [
     "latino hispanic", "middle eastern", "indian", "east asian",
@@ -54,4 +54,3 @@ LANGUAGES = [
     "telugu", "thai", "turkish", "ukrainian", "urdu", "uzbek",
     "vietnamese", "yoruba",
 ]
-

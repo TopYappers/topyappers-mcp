@@ -96,7 +96,7 @@ Arts, Automotive, Beauty & Personal Care, Books & Literature, Business, Finance,
 
 ## Platforms
 
-`tiktok`, `instagram`, `youtube`
+`tiktok`, `instagram`, `youtube`, `linkedin`, `twitter` (X/Twitter)
 
 ## Rate Limits
 

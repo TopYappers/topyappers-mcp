@@ -18,7 +18,8 @@ from ..rpc import tool_result
 TOOL = {
         "name": "search_creators",
         "description": (
-            "Search for influencers and creators across TikTok, Instagram, and YouTube. "
+            "Search for influencers and creators across TikTok, Instagram, YouTube, "
+            "LinkedIn, and X/Twitter. "
             "This endpoint is FREE — it returns creator IDs. Pass those IDs to "
             "get_creator_profiles to fetch full profiles. "
             "Start with 'nichesToPromote' — the primary discovery filter. It uses AI-analyzed "
@@ -188,7 +189,7 @@ TOOL = {
                 "source": {
                     "type": "string",
                     "enum": SOURCES,
-                    "description": "Platform source",
+                    "description": "Platform source (use 'twitter' for X/Twitter)",
                 },
                 "username": {
                     "type": "string",
