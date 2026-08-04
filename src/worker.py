@@ -139,7 +139,7 @@ def _server_info():
         },
         "description": (
             "TopYappers MCP Server - discover viral content, trending songs, "
-            "and influencers across TikTok, Instagram, and YouTube."
+            "and influencers across TikTok, Instagram, YouTube, and Twitch."
         ),
         "tools": len(TOOLS),
     })
@@ -227,4 +227,3 @@ async def on_fetch(request, env):
         return method_not_allowed_response()
 
     return json_response({"error": "Not found"}, status=404)
-

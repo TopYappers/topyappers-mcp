@@ -18,7 +18,7 @@ from ..rpc import tool_result
 TOOL = {
         "name": "search_videos",
         "description": (
-            "Search for video content from TikTok, Instagram, and YouTube. "
+            "Search for video content from TikTok, Instagram, YouTube, and Twitch. "
             "Filter by creator handle, follower count, views, likes, comments, "
             "shares, hashtags, and text search in descriptions/captions. "
             "Sort by views, likes, shares, or follower count. "

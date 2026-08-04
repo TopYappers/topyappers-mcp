@@ -1,6 +1,6 @@
 # Videos
 
-Search for video content from creators across TikTok, Instagram, and YouTube. Filter by engagement metrics, hashtags, text search, and sort results.
+Search for video content from creators across TikTok, Instagram, YouTube, and Twitch. Filter by engagement metrics, hashtags, text search, and sort results.
 
 ## Tool: `search_videos`
 
@@ -70,7 +70,7 @@ All parameters are optional. Combine filters to narrow results.
 | `user_id` | string | Platform user identifier |
 | `user_handle` | string | Creator handle/username |
 | `video_id` | string | Platform video identifier |
-| `source` | string | `"tiktok"`, `"instagram"`, or `"youtube"` |
+| `source` | string | `"tiktok"`, `"instagram"`, `"youtube"`, or `"twitch"` |
 | `comments` | integer | Comment count |
 | `description` | string | Video caption/description |
 | `hashtags` | string[] | Associated hashtags |

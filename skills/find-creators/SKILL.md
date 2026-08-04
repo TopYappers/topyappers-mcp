@@ -1,12 +1,12 @@
 ---
 name: find-creators
-description: Find influencers and creators across TikTok, Instagram, and YouTube using the TopYappers API. Use when the user wants to discover creators, find influencers for a campaign, search by niche, category, country, followers, engagement rate, promoted products, or any creator-related query.
+description: Find influencers and creators across TikTok, Instagram, YouTube, and Twitch using the TopYappers API. Use when the user wants to discover creators, find influencers for a campaign, search by niche, category, country, followers, engagement rate, promoted products, or any creator-related query.
 argument-hint: "[niche or description of creators to find]"
 ---
 
 # Find Creators & Influencers
 
-Search 30M+ creators across TikTok, Instagram, and YouTube using a credit-efficient two-step workflow.
+Search 30M+ creators across TikTok, Instagram, YouTube, and Twitch using a credit-efficient two-step workflow.
 
 ## Setup
 
@@ -188,7 +188,7 @@ When you call `get_creator_profiles`, each profile includes:
 Arts, Automotive, Beauty & Personal Care, Books & Literature, Business, Finance, Career & Jobs, Collectibles & Hobbies, Community, Ecommerce, Crafts & DIY, Culture, Education, Technology, Entertainment, Environment, Family, Parenting, Fashion, Film, Fitness, Health, Food, Gaming, Gardening & Agriculture, History, Home, Humor, Law, Government, Lifestyle, Marketing, Mental Health, Music, News & Media, Outdoors, Nature, Pets, Animals, Philosophy, Spirituality, Photography, Videography, Politics, Relationships, Religion, Science, Self-Improvement, Shopping, Social Media, Social Issues & Activism, Sports, Travel, Vehicles & Transportation, Virtual Reality, Weapons & Defense, Writing, Kids
 
 ## Available Platforms
-`tiktok`, `instagram`, `youtube`, `linkedin`, `twitter` (X/Twitter)
+`tiktok`, `instagram`, `youtube`, `twitch`, `linkedin`, `twitter` (X/Twitter)
 
 ## Countries
 Use **full country names** (not codes). Examples: `"United States"`, `"France"`, `"United Kingdom"`, `"Germany"`, `"Australia"`, `"Japan"`, `"Brazil"`, `"Canada"`, `"India"`, `"South Korea"`

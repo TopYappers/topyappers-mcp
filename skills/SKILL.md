@@ -1,11 +1,11 @@
 ---
 name: topyappers
-description: TopYappers — social media intelligence for AI agents. Discover viral TikTok content, search 30M+ creators across TikTok/Instagram/YouTube, track trending song charts, and inspect outreach email history. Use when the user asks about influencers, creators, viral content, trending songs, outreach messages, or social media data.
+description: TopYappers — social media intelligence for AI agents. Discover viral TikTok content, search 30M+ creators across TikTok/Instagram/YouTube/Twitch, track trending song charts, and inspect outreach email history. Use when the user asks about influencers, creators, viral content, trending songs, outreach messages, or social media data.
 ---
 
 # TopYappers MCP
 
-Social media intelligence for AI agents. Access viral content discovery, influencer search across TikTok, Instagram & YouTube, trending song charts, and outreach agent email history — all through a single MCP connection.
+Social media intelligence for AI agents. Access viral content discovery, influencer search across TikTok, Instagram, YouTube & Twitch, trending song charts, and outreach agent email history — all through a single MCP connection.
 
 ## Setup
 

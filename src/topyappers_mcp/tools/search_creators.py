@@ -19,7 +19,7 @@ TOOL = {
         "name": "search_creators",
         "description": (
             "Search for influencers and creators across TikTok, Instagram, YouTube, "
-            "LinkedIn, and X/Twitter. "
+            "Twitch, LinkedIn, and X/Twitter. "
             "This endpoint is FREE — it returns creator IDs. Pass those IDs to "
             "get_creator_profiles to fetch full profiles. "
             "Start with 'nichesToPromote' — the primary discovery filter. It uses AI-analyzed "

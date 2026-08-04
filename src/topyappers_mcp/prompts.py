@@ -34,7 +34,7 @@ PROMPTS = [
             },
             {
                 "name": "platform",
-                "description": "Preferred platform: tiktok, instagram, youtube, linkedin, or twitter (X/Twitter)",
+                "description": "Preferred platform: tiktok, instagram, youtube, twitch, linkedin, or twitter (X/Twitter)",
                 "required": False,
             },
             {
@@ -72,7 +72,7 @@ PROMPTS = [
             },
             {
                 "name": "platform",
-                "description": "Platform: tiktok, instagram, youtube, linkedin, or twitter (X/Twitter)",
+                "description": "Platform: tiktok, instagram, youtube, twitch, linkedin, or twitter (X/Twitter)",
                 "required": False,
             },
         ],

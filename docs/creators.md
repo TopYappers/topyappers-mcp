@@ -1,6 +1,6 @@
 # Creators & Influencers
 
-Search for influencers and creators across TikTok, Instagram, and YouTube. This uses a **two-step workflow** to save credits.
+Search for influencers and creators across TikTok, Instagram, YouTube, and Twitch. This uses a **two-step workflow** to save credits.
 
 ## Workflow
 
@@ -41,7 +41,7 @@ Returns an array of creator IDs (e.g. `["instagram_57971538386", "tiktok_12345"]
 | `promotedBusinessType` | string | Business type the creator is suitable to promote | `"B2C apps"` |
 | `accountType` | string | Account type: `"faceless"`, `"ugc"`, `"agc"`, `"clipper"`, `"brand"` | `"ugc"` |
 | `country` | string | Full country name ([see values](./reference.md#countries)) | `"France"` |
-| `source` | string | `"tiktok"`, `"instagram"`, `"youtube"`, `"linkedin"`, or `"twitter"` (X/Twitter) | `"instagram"` |
+| `source` | string | `"tiktok"`, `"instagram"`, `"youtube"`, `"twitch"`, `"linkedin"`, or `"twitter"` (X/Twitter) | `"twitch"` |
 | `username` | string | Creator handle | `"mrbeast"` |
 | `language` | string | Content language ([see values](./reference.md#languages)) | `"english"` |
 | `hashtags` | string | Hashtags, comma-separated (AND match) | `"fitness,gym"` |

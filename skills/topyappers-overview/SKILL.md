@@ -44,7 +44,7 @@ Find trending TikTok posts filtered by category, country, virality score, date r
 **Tool:** `search_viral_content` — 1 credit per result
 
 ### 2. Creators & Influencers
-Search 30M+ creators across TikTok, Instagram, and YouTube using 20+ filters. Two-step workflow to save credits.
+Search 30M+ creators across TikTok, Instagram, YouTube, and Twitch using 20+ filters. Two-step workflow to save credits.
 
 **Tools:**
 - `search_creators` — **FREE** (returns IDs only)
@@ -96,7 +96,7 @@ Arts, Automotive, Beauty & Personal Care, Books & Literature, Business, Finance,
 
 ## Platforms
 
-`tiktok`, `instagram`, `youtube`, `linkedin`, `twitter` (X/Twitter)
+`tiktok`, `instagram`, `youtube`, `twitch`, `linkedin`, `twitter` (X/Twitter)
 
 ## Rate Limits
 

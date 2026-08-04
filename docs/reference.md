@@ -57,7 +57,7 @@ Russia, Other
 Platform sources for creator and video filtering.
 
 ```
-tiktok, instagram, youtube, linkedin, twitter (X/Twitter)
+tiktok, instagram, youtube, twitch, linkedin, twitter (X/Twitter)
 ```
 
 ## Gender
