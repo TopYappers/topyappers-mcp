@@ -35,7 +35,7 @@ class ToolsRegistryTests(unittest.TestCase):
 
         self.assertEqual(
             source_schema["enum"],
-            ["tiktok", "instagram", "youtube", "linkedin", "twitter"],
+            ["tiktok", "instagram", "youtube", "twitch", "linkedin", "twitter"],
         )
 
 

@@ -1,12 +1,12 @@
 ---
 name: search-videos
-description: Search for videos from creators across TikTok, Instagram, and YouTube using the TopYappers API. Use when the user wants to find specific video content, search by hashtags, text in captions, engagement metrics, or analyze a creator's video performance.
+description: Search for videos from creators across TikTok, Instagram, YouTube, and Twitch using the TopYappers API. Use when the user wants to find specific video content, search by hashtags, text in captions, engagement metrics, or analyze a creator's video performance.
 argument-hint: "[topic, hashtag, or description of videos to find]"
 ---
 
 # Search Videos
 
-Find video content from creators across TikTok, Instagram, and YouTube. Filter by engagement metrics, hashtags, text search, and sort results.
+Find video content from creators across TikTok, Instagram, YouTube, and Twitch. Filter by engagement metrics, hashtags, text search, and sort results.
 
 ## Setup
 
@@ -82,7 +82,7 @@ Each video result includes:
 - `user_id` — platform user identifier
 - `user_handle` — creator handle/username
 - `video_id` — platform video identifier
-- `source` — platform (`"tiktok"`, `"instagram"`, `"youtube"`)
+- `source` — platform (`"tiktok"`, `"instagram"`, `"youtube"`, `"twitch"`)
 - `comments` — comment count
 - `description` — video caption/description
 - `hashtags` — array of associated hashtags

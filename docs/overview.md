@@ -3,7 +3,7 @@
 The TopYappers MCP server gives AI agents access to the [TopYappers API](https://docs.topyappers.com) through the Model Context Protocol. It covers four domains:
 
 - **Viral Content** — discover viral TikTok posts with category, country, virality score, music, and hook filters
-- **Creators / Influencers** — search and retrieve influencer profiles across TikTok, Instagram, and YouTube
+- **Creators / Influencers** — search and retrieve influencer profiles across TikTok, Instagram, YouTube, and Twitch
 - **Trending Songs** — chart rankings, new entries, song search, history, and week-over-week comparisons
 - **Agent Outreach** — inspect your own outreach projects, contacted creators, sent emails, and replies
 

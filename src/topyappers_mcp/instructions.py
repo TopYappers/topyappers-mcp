@@ -2,7 +2,7 @@
 
 INSTRUCTIONS = """# TopYappers MCP — Agent Guide
 
-You have access to the TopYappers API through this MCP server. It lets you discover **viral content**, **trending songs**, and **influencers/creators** across TikTok, Instagram, and YouTube. It also lets you inspect your own **outreach agent projects and email history** so you can reason about creator replies with context.
+You have access to the TopYappers API through this MCP server. It lets you discover **viral content**, **trending songs**, and **influencers/creators** across TikTok, Instagram, YouTube, and Twitch. It also lets you inspect your own **outreach agent projects and email history** so you can reason about creator replies with context.
 
 ## 1. Finding Viral Content
 
@@ -34,7 +34,7 @@ This is a **two-step workflow** to save credits:
 - `nichesToPromote=Shopify` — ecommerce creators
 
 Then narrow with additional filters:
-- `source` — "tiktok", "instagram", "youtube", "linkedin", or "twitter" (X/Twitter)
+- `source` — "tiktok", "instagram", "youtube", "twitch", "linkedin", or "twitter" (X/Twitter)
 - `country` — full country name (e.g. "France", "United States")
 - `followersMin` / `followersMax` — follower range
 - `averageViewsMin` / `averageViewsMax` — average post/video view range; use `averageViewsMin: 100000` for "100k+ views"
